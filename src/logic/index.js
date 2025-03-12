@@ -1,4 +1,9 @@
 const pokelist = document.getElementById("poke-list");
+const prevButton = document.getElementById("prev");
+const nextButton = document.getElementById("next");
+
+let index = 1;
+let pokemonsPerPage = 12;
 
 const getPokeTypes = (list) => {
   let ans = [];
@@ -8,12 +13,16 @@ const getPokeTypes = (list) => {
   return ans.join(" - ");
 };
 
-const getInfoData = async () => {
-  for (let i = 1; i <= 12; i++) {
+const getInfoData = async (index, pokemonsPerPage) => {
+  pokelist.innerHTML = "";
+  for (let i = index; i <= pokemonsPerPage; i++) {
     try {
       const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
       const data = await res.json();
       let pokecard = document.createElement("li");
+      pokecard.addEventListener("click", () => {
+        window.location.href = `/src/pages/pokemon.html?pokemon=${data.name}`;
+      });
       pokecard.className = "poke-card";
       pokecard.innerHTML = `
             <figcaption>
@@ -35,6 +44,7 @@ const getInfoData = async () => {
                 </ul>
             </div>
       `;
+      prevButton.disabled = index == 1;
       pokelist.appendChild(pokecard);
     } catch (er) {
       console.error(er);
@@ -42,4 +52,25 @@ const getInfoData = async () => {
   }
 };
 
-addEventListener("DOMContentLoaded", () => getInfoData());
+prevButton.addEventListener("click", () => {
+  if (index != 1) {
+    index -= 12;
+    pokemonsPerPage -= 12;
+    getInfoData(index, pokemonsPerPage);
+  }
+});
+
+nextButton.addEventListener("click", () => {
+  index += 12;
+  pokemonsPerPage += 12;
+  getInfoData(index, pokemonsPerPage);
+});
+
+const goSearch = (e) => {
+  e.preventDefault()
+  const inputValue = document.getElementById("pokemon").value
+  console.log(e)
+  window.location.href = `/src/pages/pokemon.html?pokemon=${inputValue}`
+}
+
+addEventListener("DOMContentLoaded", () => getInfoData(index, pokemonsPerPage));

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
 
 * {
   margin: 0;
@@ -9,16 +9,16 @@
 }
 
 :root {
-    --primary: #ff0000;
-    --secondary: #cc0000;
-    --contrast: #ffde00;
+  --primary-color: #ff0000;
+  --secondary-color: #cc0000;
 
-    --white: #fff;
-    --black: #000;
+  --white: #fff;
+  --black: #000;
 
-    --gray-50: #f3eaea;
-    --gray-100: #e3e3e3;
-    --gray-200: #a5a5a5;
-    --gray-300: #5d5d5d;
-    --gray-400: #2c2c2c;
+  --gray-50: #f3eaea;
+  --gray-100: #e3e3e3;
+  --gray-150: #d3d3d3;
+  --gray-200: #a5a5a5;
+  --gray-300: #5d5d5d;
+  --gray-400: #2c2c2c;
 }
